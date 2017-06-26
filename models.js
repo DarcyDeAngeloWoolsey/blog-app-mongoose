@@ -11,17 +11,17 @@ const bloggerSchema = mongoose.Schema({
         required: true
     },
     author: {
-        firstName: String,
-        lastName: String
+        type: String,
+        required: true
     },
 
 });
 
 //generate a human readable string based on the author object
 // we're storing in Mongo.
-bloggerSchema.virtual('authorString').get(function () {
-    return `${this.author.firstName} ${this.author.lastName}`.trim() //does this really need to be trimmed of white space?
-});
+//bloggerSchema.virtual('authorString').get(function () {
+//    return `${this.author.firstName} ${this.author.lastName}`.trim() //does this really need to be trimmed of white space?
+//});
 
 
 // this is an *instance method* which will be available on all instances
@@ -31,9 +31,9 @@ bloggerSchema.methods.apiRepr = function () {
 
     return {
         id: this._id,
-        name: this.name,
-        content: this.cuisine,
-        author: this.authorString
+        title: this.title,
+        content: this.content,
+        author: this.author
     };
 }
 
